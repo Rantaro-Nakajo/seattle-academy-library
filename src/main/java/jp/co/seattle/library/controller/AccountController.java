@@ -59,7 +59,7 @@ public class AccountController {
 				return "redirect:/login";
 
 			} else {
-				model.addAttribute("errorMessage", "確認用パスワードが一致しません。");
+				model.addAttribute("errorMessage", "確認用パスワードと一致しません。");
 				return "createaccount";
 			}
 		} else {
