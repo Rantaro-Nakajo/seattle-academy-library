@@ -100,4 +100,19 @@ public class BooksService {
 					bookInfo.getIsbn(), bookInfo.getDescription(), bookInfo.getBookId());
 		}
 	}
+	
+	/**
+	 * 書籍リストを取得する
+	 *
+	 * @return 書籍リスト
+	 */
+	public List<BookInfo> afroBookList(String searchword) {
+
+		//検索情報を取得
+		List<BookInfo> getedBookList = jdbcTemplate.query(
+				"SELECT * FROM books WHERE title LIKE concat('%',?,'%') ORDER BY title ASC;",
+				new BookInfoRowMapper(),searchword);
+
+		return getedBookList;
+	}
 }
