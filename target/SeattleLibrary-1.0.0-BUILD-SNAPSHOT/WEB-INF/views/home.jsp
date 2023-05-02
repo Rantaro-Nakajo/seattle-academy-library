@@ -26,6 +26,9 @@
     </header>
     <main>
         <h1>Home</h1>
+        <form action="search" method="get">
+            <input type="search" name="search" placeholder="キーワードを入力"> <input type="submit" name="submit" value="検索">
+        </form>
         <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a>
         <div class="content_body">
             <c:if test="${!empty resultMessage}">
@@ -33,7 +36,7 @@
             </c:if>
             <div>
                 <div class="booklist">
-                    <c:forEach var="bookInfo" items="">
+                    <c:forEach var="bookInfo" items="${bookList}">
                         <div class="books">
                             <form method="get" class="book_thumnail" action="editBook">
                                 <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <c:if test="${empty bookInfo.thumbnail}">
@@ -44,10 +47,10 @@
                                 </a> <input type="hidden" name="bookId" value="${bookInfo.bookId}">
                             </form>
                             <ul>
-                                <li class="book_title"></li>
-                                <li class="book_author">(著)</li>
-                                <li class="book_publisher">出版社：</li>
-                                <li class="book_publish_date">出版日：</li>
+                                <li class="book_title">${bookInfo.title}</li>
+                                <li class="book_author">${bookInfo.author}(著)</li>
+                                <li class="book_publisher">出版社：${bookInfo.publisher}</li>
+                                <li class="book_publish_date">出版日：${bookInfo.publishDate}</li>
                             </ul>
                         </div>
                     </c:forEach>

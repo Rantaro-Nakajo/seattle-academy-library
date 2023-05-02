@@ -40,7 +40,7 @@ public class PasswordResetController {
 	 * @return ログイン画面に遷移
 	 */
 	@Transactional
-	@RequestMapping(value = "/passwordReset", method = RequestMethod.POST)
+	@RequestMapping(value = "Reset", method = RequestMethod.POST)
 	public String passwordReset(Locale locale, @RequestParam("email") String email,
 			@RequestParam("password") String password, @RequestParam("passwordForCheck") String passwordForCheck,
 			Model model) {
@@ -55,8 +55,7 @@ public class PasswordResetController {
 				UserInfo userInfo = new UserInfo();
 				userInfo.setEmail(email);
 				userInfo.setPassword(password);
-				usersService.registUser(userInfo);
-				return "redirect:/login";
+				usersService.resetPass(userInfo);
 
 			} else {
 				model.addAttribute("errorMessage", "確認用パスワードと一致しません。");
@@ -66,7 +65,7 @@ public class PasswordResetController {
 			model.addAttribute("errorMessage", "半角英数字８文字で以上で入力してください。");
 			return "passwordReset";
 		}
-
+		return "redirect:/";
 	}
 
 }

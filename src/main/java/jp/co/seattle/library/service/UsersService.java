@@ -56,13 +56,9 @@ public class UsersService {
 	 * ユーザー情報更新
 	 * 
 	 */
-	public UserInfo resetUserInfo(String email, String password) {
-		try {
-			String sql = "UPDATE books SET password= ? WHERE id = ?";
-			UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper());
-			return selectedUserInfo;
-		} catch (Exception e) {
-			return null;
-		}
+	public void resetPass(UserInfo userInfo) {
+		String sql = "UPDATE users SET password =? WHERE email =?;";
+		jdbcTemplate.update(sql, userInfo.getPassword(), userInfo.getEmail());
 	}
+
 }
